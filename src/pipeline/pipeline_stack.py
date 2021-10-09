@@ -15,7 +15,7 @@ class MLOpsHuggingFaceSummarizationPipelineStack(cdk.Stack):
                                 synth=ShellStep("Synth",
                                                 input=CodePipelineSource.git_hub(
                                                     repo_string="hjander/aws-cdk-mlops-hugggingface-summarization",
-                                                    branch="main"),
+                                                    branch="master"),
                                                 commands=["npm install -g aws-cdk",
                                                           "pip install -r requirements.txt",
                                                           "cdk synth"]
