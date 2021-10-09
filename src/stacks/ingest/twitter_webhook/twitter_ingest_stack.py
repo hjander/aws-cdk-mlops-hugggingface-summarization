@@ -31,7 +31,7 @@ class TwitterIngestStack(Stack):
                                                 'TWITTER_CONSUMER_SECRET': secret.secret_value.to_string()
                                             })
 
-        raw_data_bucket = Bucket(self, "rawDataBucket")
+        raw_data_bucket = Bucket(self, "rawDataBucket", "twitter-ingest-bucket")
 
         twitter_ingest_api = RestApi(self, "twitterIngestWebhookApi",
                                      deploy_options={
