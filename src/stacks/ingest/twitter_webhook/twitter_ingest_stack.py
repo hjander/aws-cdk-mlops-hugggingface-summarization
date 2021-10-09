@@ -11,6 +11,8 @@ from aws_cdk.core import Stack
 
 
 # https://developer.twitter.com/en/docs/twitter-api/enterprise/account-activity-api/api-reference/aaa-enterprise#post-account-activity-webhooks
+from boto3.s3.inject import bucket_copy
+
 
 class TwitterIngestStack(Stack):
 
@@ -31,7 +33,7 @@ class TwitterIngestStack(Stack):
                                                 'TWITTER_CONSUMER_SECRET': secret.secret_value.to_string()
                                             })
 
-        raw_data_bucket = Bucket(self, "rawDataBucket", "twitter-ingest-bucket")
+        raw_data_bucket = Bucket(self, "rawDataBucket", bucket_name="twitter-ingest-bucket")
 
         twitter_ingest_api = RestApi(self, "twitterIngestWebhookApi",
                                      deploy_options={
