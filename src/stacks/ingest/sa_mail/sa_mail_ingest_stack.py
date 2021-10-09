@@ -26,13 +26,13 @@ class SaMailIngestStack(Stack):
         #                                        log_retention=RetentionDays.TWO_MONTHS,
         #                                        runtime=Runtime.PYTHON_3_9)
 
-        ses.ReceiptRuleSet(self, "SaMailIngestSesRuleSet", rules=[
+        x = ses.ReceiptRuleSet(self, "SaMailIngestSesRuleSet", rules=[
             ses.ReceiptRuleOptions(
                 recipients=[sa_mail_address],
                 actions=[
                     actions.S3(
                         bucket=saMailIngestBucket,
-                        object_key_prefix="sa_mail/"
+                        object_key_prefix="sa_mail"
                     )
                 ]
             )
