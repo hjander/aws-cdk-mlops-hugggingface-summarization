@@ -19,14 +19,14 @@ class SaMailIngestStack(Stack):
 
         # saMailHandlerFunction = PythonFunction(self, "saMailHandlerFunction",
         #                                        entry="src/stacks/ingest/sa_mail/lambda",
-        #                                        index="sa_mail_handler_lambda.py",
+        #                                        index="twitter_polling_handler_lambda.py",
         #                                        # handler="lambda",
         #                                        function_name='sa-mail-handler',
         #                                        insights_version=LambdaInsightsVersion.VERSION_1_0_98_0,
         #                                        log_retention=RetentionDays.TWO_MONTHS,
         #                                        runtime=Runtime.PYTHON_3_9)
 
-        x = ses.ReceiptRuleSet(self, "SaMailIngestSesRuleSet", rules=[
+        ses.ReceiptRuleSet(self, "SaMailIngestSesRuleSet", rules=[
             ses.ReceiptRuleOptions(
                 recipients=[sa_mail_address],
                 actions=[

@@ -27,12 +27,9 @@ def webhook_crc_challenge_handler():
         "response_token": "sha256=" + str(base64.b64encode(sha256_hash_digest), encoding='utf8')
     }
 
-
     response = Response(status_code=200,
                         content_type="application/json",
                         body=json.dumps(body))
-
-    logger.info(f"Returning response => {response.body}")
 
     return response
 
