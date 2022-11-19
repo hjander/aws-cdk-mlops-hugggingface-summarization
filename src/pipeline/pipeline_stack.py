@@ -1,5 +1,5 @@
-from aws_cdk import Stack
-from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
+from aws_cdk import Stack, Environment
+from aws_cdk.pipelines import ShellStep
 from constructs import Construct
 
 from cdk_pipelines_github import GitHubActionRole, GitHubWorkflow, AwsCredentials
@@ -9,18 +9,17 @@ from huggingface_summarization_application import MLOpsHuggingFaceSummarizationA
 
 class MLOpsHuggingFaceSummarizationPipelineStack(Stack):
 
+
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        GitHubActionRole(self, 'CdkGitHubActionRole', repos=['hjander/aws-cdk-mlops-hugggingface-summarization'])
+        # role = GitHubActionRole(self, 'CdkGitHubActionRole', repos=['hjander/aws-cdk-mlops-hugggingface-summarization'])
 
         pipeline = GitHubWorkflow(self, 'MLOpsHuggingFaceSummarizationGithubWorkflow',
-                                  awsCreds=AwsCredentials.fromOpenIdConnect(
-                                      gitHubActionRoleArn='arn:aws:iam::<account-id>:role/GitHubActionRole'),
+                                  workflow_name="tst",
+                                  aws_creds=AwsCredentials.from_open_id_connect(
+                                      git_hub_action_role_arn='arn:aws:iam::763597864486:role/GitHubActionRole'),
                                   synth=ShellStep("Synth",
-                                                  input=CodePipelineSource.git_hub(
-                                                      repo_string="hjander/aws-cdk-mlops-hugggingface-summarization",
-                                                      branch="master"),
                                                   commands=["npm install -g aws-cdk",
                                                             "pip install -r requirements.txt",
                                                             "cdk synth"]
