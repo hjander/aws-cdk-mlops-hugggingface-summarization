@@ -1,22 +1,17 @@
-from aws_cdk import core as cdk
-from aws_cdk.aws_apigateway import LambdaIntegration, RestApi, AwsIntegration, MethodLoggingLevel
+from aws_cdk.aws_apigateway import RestApi, MethodLoggingLevel, AwsIntegration, LambdaIntegration
 from aws_cdk.aws_iam import Role, ServicePrincipal
-from aws_cdk.aws_lambda import Runtime, LambdaInsightsVersion
-from aws_cdk.aws_lambda_python import PythonFunction
+from aws_cdk.aws_secretsmanager import Secret
+from constructs import Construct
+from aws_cdk import Stack
+from aws_cdk.aws_lambda import LambdaInsightsVersion, Runtime
+from aws_cdk.aws_lambda_python_alpha import PythonFunction
 from aws_cdk.aws_logs import RetentionDays
 from aws_cdk.aws_s3 import Bucket
-from aws_cdk.aws_secretsmanager import Secret
-
-from aws_cdk.core import Stack
-
-
-# https://developer.twitter.com/en/docs/twitter-api/enterprise/account-activity-api/api-reference/aaa-enterprise#post-account-activity-webhooks
-from boto3.s3.inject import bucket_copy
 
 
 class TwitterIngestStack(Stack):
 
-    def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         secret = Secret(self, "twitterConsumerSecret", secret_name="twitter/webhook/api/key")

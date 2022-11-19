@@ -1,4 +1,4 @@
-from aws_cdk.core import Stage
+from aws_cdk import Stage
 
 from stacks.ingest.sa_mail.sa_mail_ingest_stack import SaMailIngestStack
 from stacks.ingest.st_poller.twitter_polling_ingest_stack import StPollingIngestStack

@@ -1,12 +1,14 @@
-from aws_cdk import core as cdk
+from aws_cdk import Stack
 from aws_cdk.pipelines import CodePipeline, CodePipelineSource, ShellStep
+from constructs import Construct
 
 from huggingface_summarization_application import MLOpsHuggingFaceSummarizationApplication
 
 
-class MLOpsHuggingFaceSummarizationPipelineStack(cdk.Stack):
 
-    def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
+class MLOpsHuggingFaceSummarizationPipelineStack(Stack):
+
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         pipeline = CodePipeline(self, "MLOpsHuggingFaceSummarizationBuildPipeline",
