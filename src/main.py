@@ -7,8 +7,11 @@ from huggingface_summarization_application import MLOpsHuggingFaceSummarizationA
 from pipeline.pipeline_stack import MLOpsHuggingFaceSummarizationPipelineStack
 
 env = Environment(account="763597864486", region="us-east-1")
-
 app = App()
+
+
+MLOpsHuggingFaceSummarizationPipelineStack(app, "MLOpsHuggingFaceSummarizationPipelineStack")
+
 
 pipeline = GitHubWorkflow(app, 'MLOpsHuggingFaceSummarizationGithubWorkflow',
                           workflow_name="MLOpsHuggingFaceSummarizationPipeline",
