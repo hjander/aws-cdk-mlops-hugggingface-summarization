@@ -11,7 +11,7 @@ env = Environment(account="763597864486", region="us-east-1")
 app = App()
 
 pipeline = GitHubWorkflow(app, 'MLOpsHuggingFaceSummarizationGithubWorkflow',
-                          workflow_name="tst",
+                          workflow_name="MLOpsHuggingFaceSummarizationPipeline",
                           aws_creds=AwsCredentials.from_open_id_connect(
                               git_hub_action_role_arn='arn:aws:iam::763597864486:role/GitHubActionRole'),
                           synth=ShellStep("Synth",
