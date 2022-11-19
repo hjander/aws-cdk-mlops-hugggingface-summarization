@@ -1,5 +1,3 @@
-import aws_cdk.aws_ses as ses
-import aws_cdk.aws_ses_actions as actions
 from constructs import Construct
 from aws_cdk import Stack, Duration
 from aws_cdk.aws_events import Schedule, Rule
@@ -28,7 +26,7 @@ class StPollingIngestStack(Stack):
                                                       function_name='twitter_polling_handler',
                                                       insights_version=LambdaInsightsVersion.VERSION_1_0_98_0,
                                                       log_retention=RetentionDays.TWO_MONTHS,
-                                                      runtime=Runtime.PYTHON_3_9)
+                                                      runtime=Runtime.PYTHON_3_8)
 
         pollingScheduleRule = Rule(self, "TwitterPollingScheduleRule",
                                    schedule=Schedule.rate(duration=Duration.minutes(5)),
